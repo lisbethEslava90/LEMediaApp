@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC07402A2C27985B004183DF /* DefaultMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0740292C27985A004183DF /* DefaultMovie.swift */; };
 		BC1ED5D52C2656280021FF6A /* LEMediaAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1ED5D42C2656280021FF6A /* LEMediaAppApp.swift */; };
 		BC1ED5D72C2656280021FF6A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1ED5D62C2656280021FF6A /* ContentView.swift */; };
 		BC1ED5D92C26562A0021FF6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC1ED5D82C26562A0021FF6A /* Assets.xcassets */; };
@@ -31,6 +32,7 @@
 		BC1ED6202C2676790021FF6A /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1ED61F2C2676790021FF6A /* HTTPHeader.swift */; };
 		BC1ED6222C2679A60021FF6A /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1ED6212C2679A60021FF6A /* MovieResponse.swift */; };
 		BC1ED6242C267A180021FF6A /* ResultsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1ED6232C267A180021FF6A /* ResultsResponse.swift */; };
+		BC1ED6272C2748870021FF6A /* ListMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1ED6262C2748870021FF6A /* ListMovies.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BC0740292C27985A004183DF /* DefaultMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMovie.swift; sourceTree = "<group>"; };
 		BC1ED5D12C2656280021FF6A /* LEMediaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LEMediaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC1ED5D42C2656280021FF6A /* LEMediaAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LEMediaAppApp.swift; sourceTree = "<group>"; };
 		BC1ED5D62C2656280021FF6A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -78,6 +81,7 @@
 		BC1ED61F2C2676790021FF6A /* HTTPHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
 		BC1ED6212C2679A60021FF6A /* MovieResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
 		BC1ED6232C267A180021FF6A /* ResultsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsResponse.swift; sourceTree = "<group>"; };
+		BC1ED6262C2748870021FF6A /* ListMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMovies.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +178,7 @@
 		BC1ED6002C2664CE0021FF6A /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				BC1ED6252C2748680021FF6A /* Views */,
 				BC1ED61A2C2673A70021FF6A /* Network */,
 				BC1ED6012C2664FA0021FF6A /* HomePresenter.swift */,
 				BC1ED6022C2664FA0021FF6A /* HomeWorker.swift */,
@@ -208,6 +213,15 @@
 				BC1ED6232C267A180021FF6A /* ResultsResponse.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		BC1ED6252C2748680021FF6A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BC1ED6262C2748870021FF6A /* ListMovies.swift */,
+				BC0740292C27985A004183DF /* DefaultMovie.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -346,10 +360,12 @@
 				BC1ED6082C2664FA0021FF6A /* HomeWorker.swift in Sources */,
 				BC1ED60C2C2664FA0021FF6A /* HomeViewModel.swift in Sources */,
 				BC1ED61C2C2673B40021FF6A /* HomeApi.swift in Sources */,
+				BC07402A2C27985B004183DF /* DefaultMovie.swift in Sources */,
 				BC1ED6242C267A180021FF6A /* ResultsResponse.swift in Sources */,
 				BC1ED6172C266FB00021FF6A /* URLRequestExt.swift in Sources */,
 				BC1ED60B2C2664FA0021FF6A /* HomeModel.swift in Sources */,
 				BC1ED6132C266AA30021FF6A /* ResponseInterceptor.swift in Sources */,
+				BC1ED6272C2748870021FF6A /* ListMovies.swift in Sources */,
 				BC1ED6152C266ED30021FF6A /* Result.swift in Sources */,
 				BC1ED60A2C2664FA0021FF6A /* HomeView.swift in Sources */,
 				BC1ED6202C2676790021FF6A /* HTTPHeader.swift in Sources */,
@@ -525,6 +541,7 @@
 				DEVELOPMENT_TEAM = BVR6CRT2NX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "LE Media";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -555,6 +572,7 @@
 				DEVELOPMENT_TEAM = BVR6CRT2NX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "LE Media";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

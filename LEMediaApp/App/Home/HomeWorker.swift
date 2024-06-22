@@ -22,9 +22,7 @@ class HomeWorker {
         self.homeApi = homeApi
     }
 
-    func fetch(
-        completionHandler: @escaping (Result<ResultsResponse>) -> Void
-    ) {
+    func fetchPopular(completionHandler: @escaping (Result<ResultsResponse>) -> Void) {
         networkExecutor.fetch(
             ResultsResponse.self,
             service: homeApi.fetchPopularMovies()
@@ -35,5 +33,35 @@ class HomeWorker {
                 completionHandler(value)
             })
         .store(in: &subscriptions)
+    }
+
+    func fetchTopRated(completionHandler: @escaping (Result<ResultsResponse>) -> Void) {
+        networkExecutor.fetch(
+            ResultsResponse.self,
+            service: homeApi.fetchTopRatedMovies()
+        )
+        .sink(
+            receiveCompletion: {_ in},
+            receiveValue: { value in
+                completionHandler(value)
+            })
+        .store(in: &subscriptions)
+    }
+
+    func fetchUpcoming(completionHandler: @escaping (Result<ResultsResponse>) -> Void) {
+        networkExecutor.fetch(
+            ResultsResponse.self,
+            service: homeApi.fetchUpcomingMovies()
+        )
+        .sink(
+            receiveCompletion: {_ in},
+            receiveValue: { value in
+                completionHandler(value)
+            })
+        .store(in: &subscriptions)
+    }
+
+    func getBaseUrl() -> String {
+        return homeApi.getPosterBaseUrl()
     }
 }

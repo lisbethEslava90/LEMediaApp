@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieResponse: Decodable {
+struct MovieResponse: Decodable, Hashable {
     let id: Int
     let original_language: String
     let original_title: String
@@ -15,4 +15,6 @@ struct MovieResponse: Decodable {
     let popularity: Double
     let release_date: String
     let video: Bool
+    let poster_path: String
+    var posterUrl: URL?
 }

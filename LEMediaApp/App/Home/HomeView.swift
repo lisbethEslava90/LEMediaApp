@@ -12,8 +12,14 @@ struct HomeView: View {
 
     var body: some View {
         ZStack {
-            Text("Hello World")
+            VStack {
+                ListMovies(title: viewModel.popularTitle, movies: viewModel.popularMovies)
+                ListMovies(title: viewModel.topRatedTitle, movies: viewModel.topRatedMovies)
+                ListMovies(title: viewModel.upcomingTitle, movies: viewModel.upcomingMovies)
+            }
+            .padding(.vertical)
         }
+        .background(Color.gray)
         .onAppear {
             viewModel.configureView()
         }
