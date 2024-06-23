@@ -7,7 +7,7 @@
 //
 import Foundation
 
-class HomeViewModel: ObservableObject {
+class HomeViewModel: ObservableObject, Hashable {
     @Published var popularTitle: String = ""
     @Published var topRatedTitle: String = ""
     @Published var upcomingTitle: String = ""
@@ -17,6 +17,9 @@ class HomeViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var searchPlaceholder: String = ""
     @Published var emptyMsg: String = ""
+    @Published var presentType: Home.PresentType = .myView
+    @Published var isNavigationActive: Bool = false
+    @Published var selectedMovie: MovieResponse = MovieResponse()
 
     var filteredPopularMovies: [MovieResponse] {
         guard !searchText.isEmpty else { return popularMovies }
@@ -41,13 +44,15 @@ class HomeViewModel: ObservableObject {
 
     var interactor: HomeBusinessLogic?
 
-    func configureView() {
+    init() {
         let interactor = HomeInteractor()
         let presenter = HomePresenter()
         interactor.presenter = presenter
         self.interactor = interactor
         presenter.view = self
+    }
 
+    func configureView() {
         let request = Home.LoadInitialData.Request()
         self.interactor?.loadInitialData(request: request)
     }
@@ -72,39 +77,60 @@ extension HomeViewModel: HomeDisplayLogic {
             let request = Home.LoadMovies.Request()
             self?.interactor?.loadPopularMovies(request: request)
         }
-        DispatchQueue.global().async { [weak self] in
+        DispatchQueue.global().asyncAfter(deadline: .now() + 0.1) { [weak self] in
             let request = Home.LoadMovies.Request()
             self?.interactor?.loadTopRatedMovies(request: request)
         }
-        DispatchQueue.global().async { [weak self] in
+        DispatchQueue.global().asyncAfter(deadline: .now() + 0.2) { [weak self] in
             let request = Home.LoadMovies.Request()
             self?.interactor?.loadUpcomingMovies(request: request)
         }
     }
 
     func displayPopularMovies(viewModel: Home.LoadMovies.ViewModel) {
-        self.popularMovies = viewModel.movies
+        DispatchQueue.main.async { [weak self] in
+            self?.popularMovies = viewModel.movies
+        }
     }
 
     func displayTopRatedMovies(viewModel: Home.LoadMovies.ViewModel) {
-        self.topRatedMovies = viewModel.movies
+        DispatchQueue.main.async { [weak self] in
+            self?.topRatedMovies = viewModel.movies
+        }
     }
 
     func displayUpcomingovies(viewModel: Home.LoadMovies.ViewModel) {
-        self.upcomingMovies = viewModel.movies
+        DispatchQueue.main.async { [weak self] in
+            self?.upcomingMovies = viewModel.movies
+        }
     }
 
     func displayErrorMovies(viewModel: Home.LoadError.ViewModel) {
-        switch viewModel.movieType {
-        case .popular:
-            self.popularMovies = viewModel.movies
-        case .topRated:
-            self.topRatedMovies = viewModel.movies
-        case .upcoming:
-            self.upcomingMovies = viewModel.movies
+        DispatchQueue.main.async { [weak self] in
+            switch viewModel.movieType {
+            case .popular:
+                self?.popularMovies = viewModel.movies
+            case .topRated:
+                self?.topRatedMovies = viewModel.movies
+            case .upcoming:
+                self?.upcomingMovies = viewModel.movies
+            }
         }
     }
 }
 
 extension HomeViewModel {
+    func loadDetailMovement(movie: MovieResponse) {
+        selectedMovie = movie
+        presentType = .detailMovie
+        isNavigationActive.toggle()
+    }
+
+    static func == (lhs: HomeViewModel, rhs: HomeViewModel) -> Bool {
+        lhs === rhs
+    }
+        
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(ObjectIdentifier(self))
+    }
 }

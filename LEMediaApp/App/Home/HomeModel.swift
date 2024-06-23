@@ -8,6 +8,11 @@
 import Foundation
 
 enum Home {
+    enum PresentType {
+        case myView
+        case detailMovie
+    }
+
     enum LoadInitialData {
         struct Request {}
         struct Response {}

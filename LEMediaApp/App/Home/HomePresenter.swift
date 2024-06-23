@@ -72,9 +72,9 @@ class HomePresenter: HomePresentationLogic {
 
     func presentErrorMovies(response: Home.LoadError.Response) {
         let movies = [
-            MovieResponse(id: 0, original_language: "", original_title: "", title: "", overview: "", popularity: 0.0, release_date: "", video: false, poster_path: ""),
-            MovieResponse(id: 0, original_language: "", original_title: "", title: "", overview: "", popularity: 0.0, release_date: "", video: false, poster_path: ""),
-            MovieResponse(id: 0, original_language: "", original_title: "", title: "", overview: "", popularity: 0.0, release_date: "", video: false, poster_path: "")
+            MovieResponse(),
+            MovieResponse(),
+            MovieResponse()
         ]
         let viewModel = Home.LoadError.ViewModel(movieType: response.movieType, movies: movies)
         self.view?.displayErrorMovies(viewModel: viewModel)

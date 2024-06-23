@@ -12,6 +12,7 @@ struct ListMovies: View {
     var title: String
     let movies: [MovieResponse]
     let emptyMessage: String
+    let showMovie: (MovieResponse) -> Void
     let widthMovie = 140.0
     let heightMovie = 180.0
 
@@ -21,12 +22,12 @@ struct ListMovies: View {
                 .font(.title3.bold())
                 .foregroundStyle(colorScheme == .dark ? .white : .black)
             ScrollView(.horizontal, showsIndicators: false) {
-                if !movies.isEmpty {
-                    HStack(spacing: 15) {
+                if movies.count > 0 {
+                    LazyHStack(spacing: 15) {
                         ForEach(movies, id: \.self) { item in
                             VStack {
                                 Button {
-                                    //
+                                    showMovie(item)
                                 } label: {
                                     RoundedRectangle(cornerRadius: 12)
                                         .frame(width: widthMovie, height: heightMovie)

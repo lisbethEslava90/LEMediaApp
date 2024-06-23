@@ -25,7 +25,8 @@ class HomeInteractor: HomeBusinessLogic {
 
     func loadPopularMovies(request: Home.LoadMovies.Request) {
         let baseUrl = worker.getBaseUrl()
-        worker.fetchPopular { result in
+        worker.fetchPopular { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let populars):
                 guard let results = populars.results else {
@@ -46,7 +47,8 @@ class HomeInteractor: HomeBusinessLogic {
 
     func loadTopRatedMovies(request: Home.LoadMovies.Request) {
         let baseUrl = worker.getBaseUrl()
-        worker.fetchTopRated { result in
+        worker.fetchTopRated { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let topRated):
                 guard let results = topRated.results else {
@@ -67,7 +69,8 @@ class HomeInteractor: HomeBusinessLogic {
 
     func loadUpcomingMovies(request: Home.LoadMovies.Request) {
         let baseUrl = worker.getBaseUrl()
-        worker.fetchUpcoming { result in
+        worker.fetchUpcoming { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let upcoming):
                 guard let results = upcoming.results else {

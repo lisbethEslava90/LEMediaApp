@@ -15,7 +15,17 @@ struct MovieResponse: Decodable, Hashable {
     let overview: String
     let popularity: Double
     let release_date: String
-    let video: Bool
     let poster_path: String
     var posterUrl: URL?
+
+    init() {
+        id = 0
+        original_language = ""
+        original_title = ""
+        title = ""
+        overview = ""
+        popularity = 0.0
+        release_date = ""
+        poster_path = ""
+    }
 }
