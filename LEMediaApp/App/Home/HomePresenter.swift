@@ -22,7 +22,9 @@ class HomePresenter: HomePresentationLogic {
         let viewModel = Home.LoadInitialData.ViewModel(
             popularTitle: "Popular",
             topRatedTitle: "Top Rated",
-            upcomingTitle: "Upcoming")
+            upcomingTitle: "Upcoming",
+            searchPlaceholder: "Search...",
+            emptyMsg: "No results in this category")
         self.view?.displayInitialData(viewModel: viewModel)
     }
 
@@ -70,9 +72,9 @@ class HomePresenter: HomePresentationLogic {
 
     func presentErrorMovies(response: Home.LoadError.Response) {
         let movies = [
-            MovieResponse(id: 0, original_language: "", original_title: "", overview: "", popularity: 0.0, release_date: "", video: false, poster_path: ""),
-            MovieResponse(id: 0, original_language: "", original_title: "", overview: "", popularity: 0.0, release_date: "", video: false, poster_path: ""),
-            MovieResponse(id: 0, original_language: "", original_title: "", overview: "", popularity: 0.0, release_date: "", video: false, poster_path: "")
+            MovieResponse(id: 0, original_language: "", original_title: "", title: "", overview: "", popularity: 0.0, release_date: "", video: false, poster_path: ""),
+            MovieResponse(id: 0, original_language: "", original_title: "", title: "", overview: "", popularity: 0.0, release_date: "", video: false, poster_path: ""),
+            MovieResponse(id: 0, original_language: "", original_title: "", title: "", overview: "", popularity: 0.0, release_date: "", video: false, poster_path: "")
         ]
         let viewModel = Home.LoadError.ViewModel(movieType: response.movieType, movies: movies)
         self.view?.displayErrorMovies(viewModel: viewModel)

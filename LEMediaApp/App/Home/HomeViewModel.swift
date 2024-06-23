@@ -14,6 +14,30 @@ class HomeViewModel: ObservableObject {
     @Published var popularMovies: [MovieResponse] = []
     @Published var topRatedMovies: [MovieResponse] = []
     @Published var upcomingMovies: [MovieResponse] = []
+    @Published var searchText: String = ""
+    @Published var searchPlaceholder: String = ""
+    @Published var emptyMsg: String = ""
+
+    var filteredPopularMovies: [MovieResponse] {
+        guard !searchText.isEmpty else { return popularMovies }
+        return popularMovies.filter { item in
+            item.title.lowercased().contains(searchText.lowercased())
+        }
+    }
+
+    var filteredTopRatedMovies: [MovieResponse] {
+        guard !searchText.isEmpty else { return topRatedMovies }
+        return topRatedMovies.filter { item in
+            item.title.lowercased().contains(searchText.lowercased())
+        }
+    }
+
+    var filteredUpcomingdMovies: [MovieResponse] {
+        guard !searchText.isEmpty else { return upcomingMovies }
+        return upcomingMovies.filter { item in
+            item.title.lowercased().contains(searchText.lowercased())
+        }
+    }
 
     var interactor: HomeBusinessLogic?
 
@@ -41,19 +65,21 @@ extension HomeViewModel: HomeDisplayLogic {
         self.popularTitle = viewModel.popularTitle
         self.topRatedTitle = viewModel.topRatedTitle
         self.upcomingTitle = viewModel.upcomingTitle
+        self.searchPlaceholder = viewModel.searchPlaceholder
+        self.emptyMsg = viewModel.emptyMsg
 
         DispatchQueue.global().async { [weak self] in
             let request = Home.LoadMovies.Request()
             self?.interactor?.loadPopularMovies(request: request)
         }
-//        DispatchQueue.global().async { [weak self] in
-//            let request = Home.LoadMovies.Request()
-//            self?.interactor?.loadTopRatedMovies(request: request)
-//        }
-//        DispatchQueue.global().async { [weak self] in
-//            let request = Home.LoadMovies.Request()
-//            self?.interactor?.loadUpcomingMovies(request: request)
-//        }
+        DispatchQueue.global().async { [weak self] in
+            let request = Home.LoadMovies.Request()
+            self?.interactor?.loadTopRatedMovies(request: request)
+        }
+        DispatchQueue.global().async { [weak self] in
+            let request = Home.LoadMovies.Request()
+            self?.interactor?.loadUpcomingMovies(request: request)
+        }
     }
 
     func displayPopularMovies(viewModel: Home.LoadMovies.ViewModel) {

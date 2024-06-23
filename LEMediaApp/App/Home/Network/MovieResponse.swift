@@ -11,6 +11,7 @@ struct MovieResponse: Decodable, Hashable {
     let id: Int
     let original_language: String
     let original_title: String
+    let title: String
     let overview: String
     let popularity: Double
     let release_date: String

@@ -8,19 +8,21 @@
 import SwiftUI
 
 struct ListMovies: View {
+    @Environment(\.colorScheme) var colorScheme
     var title: String
     let movies: [MovieResponse]
+    let emptyMessage: String
     let widthMovie = 140.0
     let heightMovie = 180.0
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             Text(title)
-                .font(.title2)
-                .foregroundStyle(.white)
+                .font(.title3.bold())
+                .foregroundStyle(colorScheme == .dark ? .white : .black)
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 15) {
-                    if !movies.isEmpty {
+                if !movies.isEmpty {
+                    HStack(spacing: 15) {
                         ForEach(movies, id: \.self) { item in
                             VStack {
                                 Button {
@@ -54,17 +56,30 @@ struct ListMovies: View {
                                         }
                                 }
                                 .accentColor(.clear)
-                                Text(item.original_title)
+                                Text(item.title)
                                     .frame(width: widthMovie, height: 40)
                                     .font(.caption)
-                                    .foregroundStyle(.white)
+                                    .foregroundStyle(colorScheme == .dark ? .white : .black)
                                     .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
                             }
                         }
-                    } else {
-                        Rectangle()
-                            .fill(Color.clear)
-                            .frame(width: widthMovie, height: heightMovie + 40)
+                    }
+                } else {
+                    Rectangle()
+                        .fill(Color.clear)
+                        .frame(width: UIScreen.main.bounds.width, height: heightMovie + 40)
+                        .overlay {
+                            HStack {
+                                Spacer()
+                                Image(systemName: "info.circle")
+                                    .resizable()
+                                    .frame(width: 18, height: 18)
+                                    .foregroundColor(.gray)
+                                Text(emptyMessage)
+                                    .foregroundColor(colorScheme == .dark ? .white : .black)
+                                    .multilineTextAlignment(.center)
+                                Spacer()
+                            }
                     }
                 }
             }

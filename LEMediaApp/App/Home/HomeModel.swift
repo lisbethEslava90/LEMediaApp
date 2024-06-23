@@ -15,6 +15,8 @@ enum Home {
             let popularTitle: String
             let topRatedTitle: String
             let upcomingTitle: String
+            let searchPlaceholder: String
+            let emptyMsg: String
         }
     }
 
