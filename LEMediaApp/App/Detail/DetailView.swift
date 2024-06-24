@@ -11,7 +11,7 @@ import SwiftUI
 struct DetailView: View {
     @StateObject var viewModel = DetailViewModel()
     @Environment(\.colorScheme) var colorScheme
-    var selectedMovie: MovieResponse
+    var selectedMovie: MovieCodable
 
     var body: some View {
         ScrollView {

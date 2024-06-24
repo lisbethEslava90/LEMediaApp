@@ -40,9 +40,11 @@
 		BC1ED61C2C2673B40021FF6A /* HomeApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1ED61B2C2673B40021FF6A /* HomeApi.swift */; };
 		BC1ED61E2C2674FB0021FF6A /* HTTPUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1ED61D2C2674FB0021FF6A /* HTTPUrl.swift */; };
 		BC1ED6202C2676790021FF6A /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1ED61F2C2676790021FF6A /* HTTPHeader.swift */; };
-		BC1ED6222C2679A60021FF6A /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1ED6212C2679A60021FF6A /* MovieResponse.swift */; };
+		BC1ED6222C2679A60021FF6A /* MovieCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1ED6212C2679A60021FF6A /* MovieCodable.swift */; };
 		BC1ED6242C267A180021FF6A /* ResultsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1ED6232C267A180021FF6A /* ResultsResponse.swift */; };
 		BC1ED6272C2748870021FF6A /* ListMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1ED6262C2748870021FF6A /* ListMovies.swift */; };
+		BC88463F2C29ED6100AAF342 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BC88463E2C29ED6100AAF342 /* RealmSwift */; };
+		BC8846402C29ED7A00AAF342 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = BC88463E2C29ED6100AAF342 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,20 @@
 			remoteInfo = LEMediaApp;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BC8846412C29ED7A00AAF342 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BC8846402C29ED7A00AAF342 /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		BC0740292C27985A004183DF /* DefaultMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMovie.swift; sourceTree = "<group>"; };
@@ -99,7 +115,7 @@
 		BC1ED61B2C2673B40021FF6A /* HomeApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeApi.swift; sourceTree = "<group>"; };
 		BC1ED61D2C2674FB0021FF6A /* HTTPUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPUrl.swift; sourceTree = "<group>"; };
 		BC1ED61F2C2676790021FF6A /* HTTPHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
-		BC1ED6212C2679A60021FF6A /* MovieResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
+		BC1ED6212C2679A60021FF6A /* MovieCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCodable.swift; sourceTree = "<group>"; };
 		BC1ED6232C267A180021FF6A /* ResultsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsResponse.swift; sourceTree = "<group>"; };
 		BC1ED6262C2748870021FF6A /* ListMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMovies.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,6 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC88463F2C29ED6100AAF342 /* RealmSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,7 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				BC1ED61B2C2673B40021FF6A /* HomeApi.swift */,
-				BC1ED6212C2679A60021FF6A /* MovieResponse.swift */,
+				BC1ED6212C2679A60021FF6A /* MovieCodable.swift */,
 				BC1ED6232C267A180021FF6A /* ResultsResponse.swift */,
 			);
 			path = Network;
@@ -288,12 +305,16 @@
 				BC1ED5CD2C2656280021FF6A /* Sources */,
 				BC1ED5CE2C2656280021FF6A /* Frameworks */,
 				BC1ED5CF2C2656280021FF6A /* Resources */,
+				BC8846412C29ED7A00AAF342 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = LEMediaApp;
+			packageProductDependencies = (
+				BC88463E2C29ED6100AAF342 /* RealmSwift */,
+			);
 			productName = LEMediaApp;
 			productReference = BC1ED5D12C2656280021FF6A /* LEMediaApp.app */;
 			productType = "com.apple.product-type.application";
@@ -366,6 +387,9 @@
 				Base,
 			);
 			mainGroup = BC1ED5C82C2656280021FF6A;
+			packageReferences = (
+				BC88463D2C29E8B800AAF342 /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = BC1ED5D22C2656280021FF6A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -436,7 +460,7 @@
 				BC1ED61E2C2674FB0021FF6A /* HTTPUrl.swift in Sources */,
 				BC1ED6092C2664FA0021FF6A /* HomeInteractor.swift in Sources */,
 				BC1ED6112C2667990021FF6A /* RequestInterceptor.swift in Sources */,
-				BC1ED6222C2679A60021FF6A /* MovieResponse.swift in Sources */,
+				BC1ED6222C2679A60021FF6A /* MovieCodable.swift in Sources */,
 				BC1ED60F2C2665A50021FF6A /* NetworkExecutor.swift in Sources */,
 				BC1ED5D52C2656280021FF6A /* LEMediaAppApp.swift in Sources */,
 			);
@@ -772,6 +796,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BC88463D2C29E8B800AAF342 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BC88463E2C29ED6100AAF342 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BC88463D2C29E8B800AAF342 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BC1ED5C92C2656280021FF6A /* Project object */;
 }

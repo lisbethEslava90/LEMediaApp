@@ -10,9 +10,9 @@ import SwiftUI
 struct ListMovies: View {
     @Environment(\.colorScheme) var colorScheme
     var title: String
-    let movies: [MovieResponse]
+    let movies: [MovieCodable]
     let emptyMessage: String
-    let showMovie: (MovieResponse) -> Void
+    let showMovie: (MovieCodable) -> Void
     let widthMovie = 140.0
     let heightMovie = 180.0
 
@@ -33,7 +33,7 @@ struct ListMovies: View {
                                         .frame(width: widthMovie, height: heightMovie)
                                         .overlay {
                                             if let posterUrl = item.posterUrl {
-                                                AsyncImage(url: posterUrl) { phase in
+                                                AsyncImage(url: URL(string: posterUrl)) { phase in
                                                     switch phase {
                                                     case .success(let image):
                                                         image

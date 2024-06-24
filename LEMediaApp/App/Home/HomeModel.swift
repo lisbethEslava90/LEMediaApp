@@ -25,14 +25,29 @@ enum Home {
         }
     }
 
+    enum LoadLocalMovies {
+        struct Request {}
+        struct Response {
+            var popularMovies: [MovieCodable]
+            var topRatedMovies: [MovieCodable]
+            var upcomingMovies: [MovieCodable]
+        }
+        struct ViewModel {
+            var popularMovies: [MovieCodable]
+            var topRatedMovies: [MovieCodable]
+            var upcomingMovies: [MovieCodable]
+        }
+    }
+
     enum LoadMovies {
         struct Request {}
         struct Response {
             let baseImageUrl: String
-            var movies: [MovieResponse]
+            var movies: [MovieCodable]
+            let category: Category
         }
         struct ViewModel {
-            var movies: [MovieResponse]
+            var movies: [MovieCodable]
         }
     }
 
@@ -43,7 +58,7 @@ enum Home {
         }
         struct ViewModel {
             let movieType: MovieType
-            var movies: [MovieResponse]
+            var movies: [MovieCodable]
         }
     }
 

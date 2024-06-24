@@ -10,10 +10,10 @@ import Foundation
 enum Detail {
     enum LoadInitialData {
         struct Request {
-            let movie: MovieResponse
+            let movie: MovieCodable
         }
         struct Response {
-            let movie: MovieResponse
+            let movie: MovieCodable
         }
         struct ViewModel {
             let overviewTile: String

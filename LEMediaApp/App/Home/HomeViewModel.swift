@@ -11,31 +11,31 @@ class HomeViewModel: ObservableObject, Hashable {
     @Published var popularTitle: String = ""
     @Published var topRatedTitle: String = ""
     @Published var upcomingTitle: String = ""
-    @Published var popularMovies: [MovieResponse] = []
-    @Published var topRatedMovies: [MovieResponse] = []
-    @Published var upcomingMovies: [MovieResponse] = []
+    @Published var popularMovies: [MovieCodable] = []
+    @Published var topRatedMovies: [MovieCodable] = []
+    @Published var upcomingMovies: [MovieCodable] = []
     @Published var searchText: String = ""
     @Published var searchPlaceholder: String = ""
     @Published var emptyMsg: String = ""
     @Published var presentType: Home.PresentType = .myView
     @Published var isNavigationActive: Bool = false
-    @Published var selectedMovie: MovieResponse = MovieResponse()
+    @Published var selectedMovie: MovieCodable = MovieCodable()
 
-    var filteredPopularMovies: [MovieResponse] {
+    var filteredPopularMovies: [MovieCodable] {
         guard !searchText.isEmpty else { return popularMovies }
         return popularMovies.filter { item in
             item.title.lowercased().contains(searchText.lowercased())
         }
     }
 
-    var filteredTopRatedMovies: [MovieResponse] {
+    var filteredTopRatedMovies: [MovieCodable] {
         guard !searchText.isEmpty else { return topRatedMovies }
         return topRatedMovies.filter { item in
             item.title.lowercased().contains(searchText.lowercased())
         }
     }
 
-    var filteredUpcomingdMovies: [MovieResponse] {
+    var filteredUpcomingdMovies: [MovieCodable] {
         guard !searchText.isEmpty else { return upcomingMovies }
         return upcomingMovies.filter { item in
             item.title.lowercased().contains(searchText.lowercased())
@@ -62,6 +62,7 @@ protocol HomeDisplayLogic: AnyObject {
     func displayPopularMovies(viewModel: Home.LoadMovies.ViewModel)
     func displayTopRatedMovies(viewModel: Home.LoadMovies.ViewModel)
     func displayUpcomingovies(viewModel: Home.LoadMovies.ViewModel)
+    func displayLocalMovies(viewModel: Home.LoadLocalMovies.ViewModel)
     func displayErrorMovies(viewModel: Home.LoadError.ViewModel)
 }
 
@@ -73,17 +74,40 @@ extension HomeViewModel: HomeDisplayLogic {
         self.searchPlaceholder = viewModel.searchPlaceholder
         self.emptyMsg = viewModel.emptyMsg
 
-        DispatchQueue.global().async { [weak self] in
-            let request = Home.LoadMovies.Request()
-            self?.interactor?.loadPopularMovies(request: request)
+        let request = Home.LoadLocalMovies.Request()
+        self.interactor?.loadLocalMovies(request: request)
+    }
+
+    func displayLocalMovies(viewModel: Home.LoadLocalMovies.ViewModel) {
+        let popularMovies = viewModel.popularMovies
+        let topRatedMovies = viewModel.topRatedMovies
+        let upcomingMovies = viewModel.upcomingMovies
+
+        if !popularMovies.isEmpty {
+            self.popularMovies = popularMovies
+        } else {
+            DispatchQueue.global().async { [weak self] in
+                let request = Home.LoadMovies.Request()
+                self?.interactor?.loadPopularMovies(request: request)
+            }
         }
-        DispatchQueue.global().asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            let request = Home.LoadMovies.Request()
-            self?.interactor?.loadTopRatedMovies(request: request)
+
+        if !topRatedMovies.isEmpty {
+            self.topRatedMovies = topRatedMovies
+        } else {
+            DispatchQueue.global().asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                let request = Home.LoadMovies.Request()
+                self?.interactor?.loadTopRatedMovies(request: request)
+            }
         }
-        DispatchQueue.global().asyncAfter(deadline: .now() + 0.2) { [weak self] in
-            let request = Home.LoadMovies.Request()
-            self?.interactor?.loadUpcomingMovies(request: request)
+
+        if !upcomingMovies.isEmpty {
+            self.upcomingMovies = upcomingMovies
+        } else {
+            DispatchQueue.global().asyncAfter(deadline: .now() + 0.2) { [weak self] in
+                let request = Home.LoadMovies.Request()
+                self?.interactor?.loadUpcomingMovies(request: request)
+            }
         }
     }
 
@@ -120,7 +144,7 @@ extension HomeViewModel: HomeDisplayLogic {
 }
 
 extension HomeViewModel {
-    func loadDetailMovement(movie: MovieResponse) {
+    func loadDetailMovement(movie: MovieCodable) {
         selectedMovie = movie
         presentType = .detailMovie
         isNavigationActive.toggle()

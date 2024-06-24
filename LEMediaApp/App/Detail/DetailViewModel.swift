@@ -8,7 +8,7 @@
 import Foundation
 
 class DetailViewModel: ObservableObject {
-    @Published var movie: MovieResponse = MovieResponse()
+    @Published var movie: MovieCodable = MovieCodable()
     @Published var overviewTitle: String = ""
     @Published var yearMovie: String = ""
     @Published var popularityMovie: String = ""
@@ -26,13 +26,14 @@ class DetailViewModel: ObservableObject {
         presenter.view = self
     }
 
-    func configureView(movie: MovieResponse) {
+    func configureView(movie: MovieCodable) {
         self.movie = movie
         let request = Detail.LoadInitialData.Request(movie: self.movie)
         self.interactor?.loadInitialData(request: request)
-
+        
+        let movieId = self.movie.id
         DispatchQueue.global().async {
-            let request = Detail.LoadVideosInfo.Request(movieId: self.movie.id)
+            let request = Detail.LoadVideosInfo.Request(movieId: movieId)
             self.interactor?.loadVideosInfo(request: request)
         }
     }
