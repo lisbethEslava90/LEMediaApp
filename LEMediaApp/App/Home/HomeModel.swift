@@ -54,10 +54,10 @@ enum Home {
     enum LoadError {
         struct Request {}
         struct Response {
-            let movieType: MovieType
+            var movieType: MovieType
         }
         struct ViewModel {
-            let movieType: MovieType
+            var movieType: MovieType
             var movies: [MovieCodable]
         }
     }

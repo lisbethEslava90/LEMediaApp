@@ -61,7 +61,7 @@ protocol HomeDisplayLogic: AnyObject {
     func displayInitialData(viewModel: Home.LoadInitialData.ViewModel)
     func displayPopularMovies(viewModel: Home.LoadMovies.ViewModel)
     func displayTopRatedMovies(viewModel: Home.LoadMovies.ViewModel)
-    func displayUpcomingovies(viewModel: Home.LoadMovies.ViewModel)
+    func displayUpcomingMovies(viewModel: Home.LoadMovies.ViewModel)
     func displayLocalMovies(viewModel: Home.LoadLocalMovies.ViewModel)
     func displayErrorMovies(viewModel: Home.LoadError.ViewModel)
 }
@@ -123,7 +123,7 @@ extension HomeViewModel: HomeDisplayLogic {
         }
     }
 
-    func displayUpcomingovies(viewModel: Home.LoadMovies.ViewModel) {
+    func displayUpcomingMovies(viewModel: Home.LoadMovies.ViewModel) {
         DispatchQueue.main.async { [weak self] in
             self?.upcomingMovies = viewModel.movies
         }

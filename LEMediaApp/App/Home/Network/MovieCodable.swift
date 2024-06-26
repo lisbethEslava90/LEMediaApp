@@ -28,13 +28,23 @@ class MovieCodable: Object, Decodable {
         poster_path = ""
     }
 
+    init(id: Int, lenguaje: String, title: String, overview: String, popularity: Double, date: String, path: String) {
+        self.id = id
+        self.original_language = lenguaje
+        self.title = title
+        self.overview = overview
+        self.popularity = popularity
+        self.release_date = date
+        self.poster_path = path
+    }
+
     static func == (lhs: MovieCodable, rhs: MovieCodable) -> Bool {
         lhs === rhs
     }
 }
 
 class Category: Object {
-    @Persisted(primaryKey: true) var id = 0
+    @Persisted(primaryKey: true) var id = "0"
     @Persisted var name = ""
     @Persisted var movies = List<MovieCodable>()
 }

@@ -77,15 +77,11 @@ class HomePresenter: HomePresentationLogic {
         }
         saveLocalMovies(category: response.category, movies: upcoming)
         let viewModel = Home.LoadMovies.ViewModel(movies: upcoming)
-        self.view?.displayUpcomingovies(viewModel: viewModel)
+        self.view?.displayUpcomingMovies(viewModel: viewModel)
     }
 
     func presentErrorMovies(response: Home.LoadError.Response) {
-        let movies = [
-            MovieCodable(),
-            MovieCodable(),
-            MovieCodable()
-        ]
+        let movies: [MovieCodable] = []
         let viewModel = Home.LoadError.ViewModel(movieType: response.movieType, movies: movies)
         self.view?.displayErrorMovies(viewModel: viewModel)
     }

@@ -31,15 +31,15 @@ class HomeInteractor: HomeBusinessLogic {
         var upcomingMovies: [MovieCodable] = []
         let realm = try! Realm()
 
-        if let popularCategory = realm.object(ofType: Category.self, forPrimaryKey: 1) {
+        if let popularCategory = realm.object(ofType: Category.self, forPrimaryKey: "1") {
             popularMovies = Array(popularCategory.movies)
         }
 
-        if let topRatedCategory = realm.object(ofType: Category.self, forPrimaryKey: 2) {
+        if let topRatedCategory = realm.object(ofType: Category.self, forPrimaryKey: "2") {
             topRatedMovies = Array(topRatedCategory.movies)
         }
 
-        if let upcomingCategory = realm.object(ofType: Category.self, forPrimaryKey: 3) {
+        if let upcomingCategory = realm.object(ofType: Category.self, forPrimaryKey: "3") {
             upcomingMovies = Array(upcomingCategory.movies)
         }
 
@@ -53,7 +53,7 @@ class HomeInteractor: HomeBusinessLogic {
     func loadPopularMovies(request: Home.LoadMovies.Request) {
         let baseUrl = worker.getBaseUrl()
         let category = Category()
-        category.id = 1
+        category.id = "1"
         category.name = "Popular"
 
         worker.fetchPopular { [weak self] result in
@@ -80,7 +80,7 @@ class HomeInteractor: HomeBusinessLogic {
     func loadTopRatedMovies(request: Home.LoadMovies.Request) {
         let baseUrl = worker.getBaseUrl()
         let category = Category()
-        category.id = 2
+        category.id = "2"
         category.name = "TopRated"
 
         worker.fetchTopRated { [weak self] result in
@@ -107,7 +107,7 @@ class HomeInteractor: HomeBusinessLogic {
     func loadUpcomingMovies(request: Home.LoadMovies.Request) {
         let baseUrl = worker.getBaseUrl()
         let category = Category()
-        category.id = 3
+        category.id = "3"
         category.name = "Upcoming"
 
         worker.fetchUpcoming { [weak self] result in
