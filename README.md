@@ -30,7 +30,10 @@ La aplicación fue desarrollada de acuerdo a las siguientes tecnologías:
 - Si alguna de las Apis que alimenta las categorias falla, no mostrará películas para esa categoría
 - Si el Api de carga de videos falla, igual podrá visualizar la información de la pelicula
 - Soporta modo de visualización light y dark 
-- Se incluyen pruebas unitarias y de integración con code coverage de 80% 
+- Se incluyen pruebas unitarias y de integración con code coverage de 80%
+- Instrumets review without memory leaks
+![Screenshot 2024-06-26 at 12 37 28 PM](https://github.com/lisbethEslava90/LEMediaApp/assets/865505/f9b9f50c-aa77-4c7c-b3e3-9784372881db)
+
 
 ## Previews
 
